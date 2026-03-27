@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AttendanceIQ — Smart Class Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<div class="container">
+  <div class="header">
+    <div class="logo-badge"><div class="logo-dot"></div> AttendanceIQ</div>
+    <h1>Track Your<br>Attendance</h1>
+    <p class="subtitle">Know exactly how many classes you can skip<br>or need to attend to stay on track.</p>
+  </div>
+
+  <div class="card">
+    <div class="fields">
+      <div class="field-group">
+        <label>Total Classes Conducted</label>
+        <div class="input-wrap">
+          <span class="input-icon">📚</span>
+          <input type="number" id="totalClasses" placeholder="e.g. 80" min="1" max="999">
+        </div>
+        <div class="err-msg" id="totalErr">Please enter a valid number of total classes.</div>
+      </div>
+
+      <div class="field-group">
+        <label>Classes Attended</label>
+        <div class="input-wrap">
+          <span class="input-icon">✅</span>
+          <input type="number" id="attendedClasses" placeholder="e.g. 60" min="0" max="999">
+        </div>
+        <div class="attend-bar-wrap">
+          <div class="attend-bar-fill" id="attendBar"></div>
+        </div>
+        <div class="err-msg" id="attendErr">Attended classes can't exceed total classes.</div>
+      </div>
+    </div>
+
+    
+    <div style="margin-bottom: 10px;">
+      <label>Required Attendance Threshold</label>
+    </div>
+    <div class="threshold-row" id="thresholdRow">
+      <button class="thresh-btn" data-val="50">50%</button>
+      <button class="thresh-btn" data-val="75">75%</button>
+      <button class="thresh-btn active" data-val="80">80%</button>
+      <button class="thresh-btn" data-val="85">85%</button>
+    </div>
+
+    
+    <div class="captcha-section">
+      <div class="captcha-label">🔒 Verify you're human</div>
+      <div class="captcha-row">
+        <div class="captcha-display" id="captchaDisplay">
+          <div class="noise-line" style="top: 35%"></div>
+          <div class="noise-line" style="top: 65%"></div>
+          <span id="captchaText"></span>
+        </div>
+        <button class="captcha-refresh" id="captchaRefresh" title="Refresh captcha">↻</button>
+      </div>
+      <div class="captcha-input-row">
+        <input type="text" id="captchaInput" placeholder="Enter code above" maxlength="6" autocomplete="off" spellcheck="false">
+        <div class="err-msg" id="captchaErr">Incorrect code. Please try again.</div>
+      </div>
+    </div>
+
+    <button class="btn-calc" id="calcBtn">Calculate Attendance →</button>
+
+    
+    <div class="result-card" id="resultCard">
+      <div class="result-top">
+        <div class="result-emoji" id="resultEmoji"></div>
+        <div>
+          <div class="result-title" id="resultTitle"><span id="zoneBadge"></span></div>
+          <div class="result-subtitle" id="resultSubtitle"></div>
+        </div>
+      </div>
+
+      <div class="alert-banner" id="alertBanner">
+        <div class="alert-icon-wrap">
+          <div class="ping"></div>
+          <span id="alertIcon"></span>
+        </div>
+        <div class="alert-text">
+          <div class="alert-zone-label" id="alertZoneLabel"></div>
+          <div class="alert-msg" id="alertMsg"></div>
+        </div>
+      </div>
+
+   
+      <div class="chart-section">
+        <div class="chart-title">📊 Attendance Breakdown</div>
+        <div class="pie-chart-wrap">
+          <div class="pie-svg-container">
+            <svg class="pie-svg" viewBox="0 0 140 140" id="pieSvg">
+              <!-- Slices rendered by JS -->
+            </svg>
+            <div class="pie-center-info">
+              <div class="pie-center-pct" id="pieCenterPct"></div>
+              <div class="pie-center-label">attended</div>
+            </div>
+          </div>
+          <div class="pie-legend" id="pieLegend"></div>
+        </div>
+      </div>
+
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="result-message" id="resultMessage"></div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Built for students who love math but hate failing. <span>♥</span></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
